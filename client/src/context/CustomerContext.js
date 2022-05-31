@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect } from 'react';
 
 const CustomerContext = createContext();
 
@@ -7,15 +7,22 @@ export const CustomerProvider = ({ children }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await fetch("http://localhost:8000/customers");
+      const res = await fetch('http://localhost:8000/customers');
       const resJson = await res.json();
       setCustomers(resJson);
     };
     fetchData();
   }, []);
 
+  const deleteCustomer = async (id) => {
+    await fetch(`http://localhost:8000/customers/${id}`, {
+      method: 'DELETE',
+    });
+    setCustomers(customers.filter((cus) => cus.id !== id));
+  };
+
   return (
-    <CustomerContext.Provider value={{ customers }}>
+    <CustomerContext.Provider value={{ customers, deleteCustomer }}>
       {children}
     </CustomerContext.Provider>
   );
