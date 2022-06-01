@@ -1,3 +1,4 @@
+import { useContext } from 'react';
 import {
   Button,
   FormControlLabel,
@@ -6,34 +7,37 @@ import {
   Rating,
   TextField,
   Typography,
-} from "@mui/material";
-import { Box, Container } from "@mui/system";
-import { useState } from "react";
+} from '@mui/material';
+import { Box, Container } from '@mui/system';
+import { useState } from 'react';
 
-import SendIcon from "@mui/icons-material/Send";
+import SendIcon from '@mui/icons-material/Send';
+import CustomerContext from '../context/CustomerContext';
 
 export default function Create() {
-  const [name, setName] = useState("");
+  const [name, setName] = useState('');
   const [nameError, setNameError] = useState(false);
 
-  const [details, setDetails] = useState("");
+  const [details, setDetails] = useState('');
   const [detailsError, setDetailsError] = useState(false);
 
-  const [gender, setGender] = useState("female");
+  const [gender, setGender] = useState('female');
 
   const [rating, setRating] = useState(3);
+
+  const { createCustomer } = useContext(CustomerContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (name && details) {
-      console.log(name, details, gender, rating);
+      createCustomer({ name, details, gender, rating });
       setNameError(false);
       setDetailsError(false);
     }
-    if (name === "") {
+    if (name === '') {
       setNameError(true);
     }
-    if (details === "") {
+    if (details === '') {
       setDetailsError(true);
     }
   };
@@ -67,7 +71,11 @@ export default function Create() {
             value={gender}
             onChange={(e) => setGender(e.target.value)}
           >
-            <FormControlLabel value="male" control={<Radio />} label="Male" />
+            <FormControlLabel
+              value="male"
+              control={<Radio />}
+              label="Male"
+            />
             <FormControlLabel
               value="female"
               control={<Radio />}
@@ -84,7 +92,11 @@ export default function Create() {
             onChange={(e) => setRating(~~e.target.value)}
           />
         </Box>
-        <Button type="submit" variant="contained" startIcon={<SendIcon />}>
+        <Button
+          type="submit"
+          variant="contained"
+          startIcon={<SendIcon />}
+        >
           Submit
         </Button>
       </form>

@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import {
+  Avatar,
   Card,
   CardContent,
   CardHeader,
@@ -12,8 +13,16 @@ import CustomerContext from '../context/CustomerContext';
 
 export default function CustomerCard({ cus }) {
   const { deleteCustomer } = useContext(CustomerContext);
+
+  const stringAvatar = (name) => {
+    return {
+      children: `${name.split(' ')[0][0]}${name.split(' ')[1][0]}`,
+    };
+  };
+
   return (
     <Card>
+      <Avatar sx={{ bgcolor: 'green' }} {...stringAvatar(cus.name)} />
       <CardHeader
         title={cus.name}
         action={

@@ -14,6 +14,23 @@ export const CustomerProvider = ({ children }) => {
     fetchData();
   }, []);
 
+  const createCustomer = async ({
+    name,
+    details,
+    gender,
+    rating,
+  }) => {
+    const res = await fetch(`http://localhost:8000/customers`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ name, details, gender, rating }),
+    });
+    const data = res.json();
+    setCustomers([data, ...customers]);
+  };
+
   const deleteCustomer = async (id) => {
     await fetch(`http://localhost:8000/customers/${id}`, {
       method: 'DELETE',
@@ -22,7 +39,9 @@ export const CustomerProvider = ({ children }) => {
   };
 
   return (
-    <CustomerContext.Provider value={{ customers, deleteCustomer }}>
+    <CustomerContext.Provider
+      value={{ customers, deleteCustomer, createCustomer }}
+    >
       {children}
     </CustomerContext.Provider>
   );
