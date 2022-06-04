@@ -14,17 +14,35 @@ import {
 
 import InboxIcon from '@mui/icons-material/Inbox';
 
+import { styled } from '@mui/system';
+
 import CustomerCard from '../components/CustomerCard';
 import CustomerContext from '../context/CustomerContext';
 
 export default function Home() {
   const { customers } = useContext(CustomerContext);
+
+  const MyDiv = styled('div')({
+    backgroundColor: 'aliceblue',
+    padding: 10,
+    borderRadius: 15,
+  });
+  const MyTypography = styled(Typography)({
+    backgroundColor: '#52A388',
+    color: 'white',
+    textAlign: 'center',
+    padding: 5,
+    fontSize: '20px',
+  });
   return (
     <Container>
       <CssBaseline />
       <Typography variant="h3" align="center" gutterBottom>
         App to manage customers
       </Typography>
+      <MyTypography variant="h1">
+        This is an app using Material UI 5
+      </MyTypography>
       <Box sx={{ display: 'flex' }}>
         <Box>
           <Drawer variant="permanent" anchor="left">
@@ -43,7 +61,9 @@ export default function Home() {
             {customers &&
               customers.map((cus) => (
                 <Grid key={cus.id} item xs={4}>
-                  <CustomerCard cus={cus} />
+                  <MyDiv>
+                    <CustomerCard cus={cus} />
+                  </MyDiv>
                 </Grid>
               ))}
           </Grid>

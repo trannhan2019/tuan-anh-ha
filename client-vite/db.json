@@ -41,6 +41,13 @@
       "gender": "female",
       "rating": 4,
       "id": 6
+    },
+    {
+      "name": "Tran thi test 2",
+      "details": "Day la tran thi test 2",
+      "gender": "female",
+      "rating": 4,
+      "id": 7
     }
   ]
 }

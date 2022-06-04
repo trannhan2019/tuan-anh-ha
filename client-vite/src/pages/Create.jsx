@@ -7,8 +7,9 @@ import {
   Rating,
   TextField,
   Typography,
+  Box,
+  Container,
 } from '@mui/material';
-import { Box, Container } from '@mui/system';
 import { useState } from 'react';
 
 import SendIcon from '@mui/icons-material/Send';
